@@ -36,5 +36,26 @@ option(2) :- nl,
     format('Avô(s) de ~w: ~w\n', [Y, L])), nl,
     forall(setof(X, avomulher(X,Y), L),
     format('Avó(s) de ~w: ~w\n', [Y, L])), nl, !.
-    
+
+option(3) :- nl,
+    write('Listagem de primos e primas...'), nl,
+    forall(setof(X, primo(X,Y), L),
+    format('Primo(s) de ~w: ~w\n', [Y, L])), nl,
+    forall(setof(X, prima(X,Y), L),
+    format('Prima(s) de ~w: ~w\n', [Y, L])), nl, !.
+
+option(4) :- nl,
+    write('Listagem de sobrinhos e sobrinhas...'), nl,
+    forall(setof(X, sobrinho(X,Y), L),
+    format('Sobrinho(s) de ~w: ~w\n', [Y, L])), nl,
+    forall(setof(X, sobrinha(X,Y), L),
+    format('Sobrinha(s) de ~w: ~w\n', [Y, L])), nl, !.
+
+option(5) :- nl,
+    write('Listagem de irmãos e irmãs...'), nl,
+    forall(setof(X, irmao(X,Y), L),
+    format('Irmão(s) de ~w: ~w\n', [Y, L])), nl,
+    forall(setof(X, irma(X,Y), L),
+    format('Irmã(s) de ~w: ~w\n', [Y, L])), nl, !.
+
 option(_) :- write('It is not an acceptable option'), nl, !.
