@@ -1,7 +1,22 @@
 main:-  consult('familia.pl'),
 	consult('arvore_geneyalogica.pl'),
+	consult('main.pl'),
     menu,
 	!.
+
+ifThenElse(X, Y, _) :- X, !, Y.
+ifThenElse(_, _, Z) :- Z.
+
+leSobrinhoIndividual(X,Y):- 
+	write('Listagem de sobrinhos:'), nl, findall(Y, tios(X,Y), L), sort(L, X), printlist(X), nl,
+	write('Digite o nome do sobrinho para saber seus tios:'), nl,
+	read(Sobrinho), forall(setof(_, tios(Tios,Sobrinho), _),
+    format('Tio(a) de ~w: ~w\n', [Sobrinho, Tios])).%forall(setof(X, tios(X,Sobrinho), L),format('Tio(s) de ~w: ~w\n', Sobrinho, L)), nl.
+
+printlist([]).
+printlist([X|List]) :-
+	write(X),nl,
+	printlist(List).
 
 menu :- repeat,
 	write('=== MENU ==='), nl,
@@ -24,7 +39,10 @@ forall(Cond, Action) :-
 
 option(0) :- !.
 option(1) :- nl,
-    write('Listagem de tios e tias...'), nl,
+	write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
+	read(Alternativa),
+	ifThenElse(Alternativa =:= 1, leSobrinhoIndividual(X,Y), write('Listagem de todos os tios e tias...')),
+	nl,
     forall(setof(X, tio(X,Y), L),
     format('Tio(s) de ~w: ~w\n', [Y, L])), nl,
     forall(setof(X, tia(X,Y), L),
