@@ -49,3 +49,11 @@ irmao(X,Y) :- irmaos(X,Y), homem(X). % "Para todo X e Y, se Z é progenitor de X
 tios(X,Y) :- irmaos(X,Z), progenitor(Z,Y), \+progenitor(X,Y).
 tia(X,Y) :- tios(X,Y), mulher(X). % "\+ = operador NOT"
 tio(X,Y) :- tios(X,Y), homem(X).
+
+sobrinhos(X,Y) :- tios(Y,X), \+progenitor(X,Y).
+sobrinho(X,Y) :- sobrinhos(X,Y), homem(X).
+sobrinha(X,Y) :- sobrinhos(X,Y), mulher(X).
+
+primos(X,Y) :- filhos(X,Z), tios(Z,Y).
+primo(X,Y) :- primos(X,Y), homem(X).
+prima(X,Y) :- primos(X,Y), mulher(X).
