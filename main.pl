@@ -58,4 +58,24 @@ option(5) :- nl,
     forall(setof(X, irma(X,Y), L),
     format('Irmã(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(_) :- write('It is not an acceptable option'), nl, !.
+option(6) :- nl,
+    write('Listagem de filhos e filhas...'), nl,
+    forall(setof(X, filho(X,Y), L),
+    format('Filho(s) de ~w: ~w\n', [Y, L])), nl,
+    forall(setof(X, filha(X,Y), L),
+    format('Filha(s) de ~w: ~w\n', [Y, L])), nl, !.
+
+option(7) :- nl,
+    write('Listagem de netos e netas...'), nl,
+    forall(setof(X, neto(X,Y), L),
+    format('Neto(s) de ~w: ~w\n', [Y, L])), nl,
+    forall(setof(X, neta(X,Y), L),
+    format('Neta(s) de ~w: ~w\n', [Y, L])), nl, !.
+option(8) :- nl,
+    write('Listagem de pais e mães...'), nl,
+    forall(setof(X, pai(X,Y), [H|_]),
+    format('Pai de ~w: ~w\n', [Y, H])), nl,
+    forall(setof(X, mae(X,Y), [H|_]),
+    format('Mãe de ~w: ~w\n', [Y, H])), nl, !.
+
+option(_) :- write('Escolha uma opção válida.'), nl, !.
