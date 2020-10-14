@@ -1,29 +1,3 @@
-mulher(pam).
-mulher(liz).
-mulher(pat).
-mulher(ann).
-
-homem(tom).
-homem(bob).
-homem(jim).
-homem(paul).
-homem(john).
-
-progenitor(pam, bob).	% "pais do bob"
-progenitor(tom, bob).
-
-progenitor(pam, paul).	% "pais do paul"
-progenitor(tom, paul).
-
-progenitor(tom, liz).	% "tom é um dos progenitores de liz"
-
-progenitor(bob, ann).
-
-progenitor(bob, pat).
-
-progenitor(pat, jim).
-
-progenitor(liz, john).
 
 antepassado(X,Y) :- progenitor(X,Y); progenitor(X,Z), antepassado(Z,Y).
 
@@ -42,18 +16,20 @@ netos(X,Y) :- avos(Y,X).
 neto(X,Y) :- netos(X,Y), homem(X).
 neta(X,Y) :- netos(X,Y), mulher(X).
 
-irmaos(X,Y) :- progenitor(Z,X), progenitor(Z,Y).
+irmaos(X,Y) :- progenitor(Z,X), progenitor(Z,Y), diferente(X,Y).
 irma(X,Y) :- irmaos(X,Y), mulher(X).
 irmao(X,Y) :- irmaos(X,Y), homem(X). % "Para todo X e Y, se Z é progenitor de X e Z é progenitor de Y e X é homem, X é um irmão"
 
-tios(X,Y) :- irmaos(X,Z), progenitor(Z,Y), \+progenitor(X,Y).
+tios(X,Y) :- irmaos(X,Z), progenitor(Z,Y).
 tia(X,Y) :- tios(X,Y), mulher(X). % "\+ = operador NOT"
 tio(X,Y) :- tios(X,Y), homem(X).
 
-sobrinhos(X,Y) :- tios(Y,X), \+progenitor(X,Y).
+sobrinhos(X,Y) :- tios(Y,X).
 sobrinho(X,Y) :- sobrinhos(X,Y), homem(X).
 sobrinha(X,Y) :- sobrinhos(X,Y), mulher(X).
 
 primos(X,Y) :- filhos(X,Z), tios(Z,Y).
 primo(X,Y) :- primos(X,Y), homem(X).
 prima(X,Y) :- primos(X,Y), mulher(X).
+
+diferente(X,Y) :- X\==Y. %X é diferente de Y
