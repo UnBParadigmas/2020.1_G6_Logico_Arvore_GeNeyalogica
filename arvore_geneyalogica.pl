@@ -1,4 +1,3 @@
-
 antepassado(X,Y) :- progenitor(X,Y); progenitor(X,Z), antepassado(Z,Y).
 
 mae(X,Y) :- progenitor(X,Y), mulher(X).
