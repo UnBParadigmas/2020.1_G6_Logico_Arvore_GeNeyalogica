@@ -33,3 +33,11 @@ pai(X,Y) :- progenitor(X,Y), homem(X).
 filhos(X,Y) :- progenitor(Y,X). % "Para todo X e Y, se X é progenitor de Y, então Y é filho de X"
 filho(X,Y) :- filhos(X,Y), homem(X).
 filha(X,Y) :- filhos(X,Y), mulher(X).
+
+avos(X,Y) :- progenitor(X,Z), progenitor(Z,Y).
+avomulher(X,Y) :- progenitor(X,Z), progenitor(Z,Y), mulher(X).
+avohomem(X,Y) :- progenitor(X,Z), progenitor(Z,Y), homem(X).
+
+netos(X,Y) :- avos(Y,X).
+neto(X,Y) :- netos(X,Y), homem(X).
+neta(X,Y) :- netos(X,Y), mulher(X).
