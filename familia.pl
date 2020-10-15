@@ -3,7 +3,6 @@ mulher(su).
 mulher(liz).
 mulher(pat).
 mulher(ann).
-mulher(olivia).
 mulher(emily).
 
 homem(fran).
@@ -28,7 +27,7 @@ progenitor(pam, paul).	% "pais do paul"
 progenitor(tom, paul).
 
 progenitor(tom, liz).	% "tom é um dos progenitores de liz"
-progenitor(olivia, liz).
+progenitor(pam, liz).
 
 progenitor(bob, ann).
 progenitor(bob, pat).
@@ -44,7 +43,5 @@ progenitor(harry, john).
 casado(pam, tom).
 
 casado(emily, bob).
-
-casado(olivia, tom).
 
 casado(harry, liz).

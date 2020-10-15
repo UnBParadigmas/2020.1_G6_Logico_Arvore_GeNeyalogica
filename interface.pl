@@ -5,7 +5,12 @@ interface(X) :-
 
 option(0) :- !.
 
-option(1) :- nl,
+option(1) :- consult('familia.pl').
+
+option(2) :-
+    submenu, !.
+
+option(3) :- nl,
 	write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, leTiosIndividual(X,Y), write('Listagem de todos os tios e tias...')),
@@ -15,7 +20,7 @@ option(1) :- nl,
     forall(setof(X, tia(X,Y), L),
     format('Tia(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(2) :- nl,
+option(4) :- nl,
     write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, leAvosIndividual(X,Y), write('Listagem de todos os avôs e avós...')),
@@ -25,7 +30,7 @@ option(2) :- nl,
     forall(setof(X, avomulher(X,Y), L),
     format('Avó(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(3) :- nl,
+option(5) :- nl,
     write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, lePrimosIndividual(X,Y), write('Listagem de todos os primos e primas...')),
@@ -35,7 +40,7 @@ option(3) :- nl,
     forall(setof(X, prima(X,Y), L),
     format('Prima(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(4) :- nl,
+option(6) :- nl,
     write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, leSobrinhosIndividual(X,Y), write('Listagem de todos os sobrinhos e sobrinhas...')),
@@ -45,7 +50,7 @@ option(4) :- nl,
     forall(setof(X, sobrinha(X,Y), L),
     format('Sobrinha(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(5) :- nl,
+option(7) :- nl,
     write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, leIrmaosIndividual(X,Y), write('Listagem de todos os irmãos e irmãs...')),
@@ -55,7 +60,7 @@ option(5) :- nl,
     forall(setof(X, irma(X,Y), L),
     format('Irmã(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(6) :- nl,
+option(8) :- nl,
     write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, leFilhosIndividual(X,Y), write('Listagem de todos os filhos e filhas...')),
@@ -65,7 +70,7 @@ option(6) :- nl,
     forall(setof(X, filha(X,Y), L),
     format('Filha(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(7) :- nl,
+option(9) :- nl,
 	write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, leNetosIndividual(X,Y), write('Listagem de todos os netos e netas...')),
@@ -75,7 +80,7 @@ option(7) :- nl,
     forall(setof(X, neta(X,Y), L),
     format('Neta(s) de ~w: ~w\n', [Y, L])), nl, !.
 
-option(8) :- nl,
+option(10) :- nl,
 	write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, lePaisIndividual(X,Y), write('Listagem de todos os pais e mães...')),
@@ -85,7 +90,7 @@ option(8) :- nl,
     forall(setof(X, mae(X,Y), [H|_]),
     format('Mãe de ~w: ~w\n', [Y, H])), nl, !.
 
-option(9) :- nl,
+option(11) :- nl,
 	write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
 	ifThenElse(Alternativa =:= 1, leCasadosIndividual(X,Y), write('Listagem de todos os casados...')),
@@ -94,11 +99,6 @@ option(9) :- nl,
     format('Marido de ~w: ~w\n', [Y, H])), nl,
     forall(setof(X, esposa(X,Y), [H|_]),
     format('Esposa de ~w: ~w\n', [Y, H])), nl, !.
-
-option(10) :-
-    submenu, !.
-
-option(11) :- consult('familia.pl').
 
 option(_) :- write('Escolha uma opção válida.'), nl, !.
 
