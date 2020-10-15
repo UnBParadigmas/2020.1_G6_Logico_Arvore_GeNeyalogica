@@ -1,6 +1,8 @@
 diferente(X,Y) :- X\==Y. %X é diferente de Y
 
 casados(X,Y) :- casado(X,Y); casado(Y,X).
+esposa(X,Y) :- casados(X, Y), mulher(X).
+marido(X,Y) :- casados(X, Y), homem(X).
 
 antepassado(X,Y) :-
     progenitor(X,Y);
