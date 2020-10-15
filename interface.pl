@@ -107,6 +107,7 @@ submenu:-  repeat,
 	write('1. Adicionar pessoa a base'), nl,
 	write('2. Mostrar todas as pessoas da base de dados'), nl,
     write('3. Adicionar progenitores'), nl,
+    write('4. Realizar casamento'), nl,
 	write('0. Sair para o menu principal'), nl,
 	read(K),
 	submenu_option(K),
@@ -120,6 +121,7 @@ submenu_option(1):-
     ifThenElse(Escolha =:= 0, inserirHomemNaBase, inserirMulherNaBase), !.
 submenu_option(2):- mostrarPessoasNaBase, nl, !.
 submenu_option(3):- adicionarProgenitores, nl, !.
+submenu_option(4):- realizaCasamento, nl, !.
 
 submenu_option(_):- write('Escolha uma opção válida.'), nl, !.
 
@@ -136,6 +138,11 @@ adicionarProgenitores():-write('Digite o progenitor e seu/sua filho(a)'), nl,
                    write('Filho(a):'), nl, read(Filho), nl,
                    asserta(progenitor(Progenitor, Filho)).
 
+realizaCasamento():-write('Digite o nome dos cônjuges'), nl,
+                   write('Primeiro cônjuge:'), read(Conjuge1), nl,
+                   write('Segundo cônjuge:'), read(Conjuge2), nl,
+                   asserta(casado(Conjuge1, Conjuge2)).
+
 leTiosIndividual(X,Y) :- 
 	write('Listagem de sobrinhos:'), nl, findall(X, sobrinhos(X,Y), L), sort(L, X), printlist(X), nl,
 	write('Digite o nome do(a) sobrinho(a) para saber seus tios:'), nl,
@@ -146,7 +153,7 @@ leAvosIndividual(X,Y) :-
 	write('Listagem de netos:'), nl, findall(X, netos(X,Y), L), sort(L, X), printlist(X), nl,
 	write('Digite o nome do(a) neto(a) para saber seus avós:'), nl,
 	read(Neto), forall(setof(_, avos(Avo,Neto), _),
-    format('Avô(a) de ~w: ~w\n', [Neto, Avo])).
+    format('Avô(ó) de ~w: ~w\n', [Neto, Avo])).
 
 lePrimosIndividual(X,Y) :- 
 	write('Listagem de primos:'), nl, findall(X, primos(X,Y), L), sort(L, X), printlist(X), nl,
