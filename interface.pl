@@ -1,6 +1,5 @@
 interface(X) :-
     consult('util.pl'),
-    consult('familia.pl'),
     consult('arvore_geneyalogica.pl'),
     option(X).
 
@@ -98,6 +97,8 @@ option(9) :- nl,
 
 option(10) :-
     submenu, !.
+
+option(11) :- consult('familia.pl').
 
 option(_) :- write('Escolha uma opção válida.'), nl, !.
 

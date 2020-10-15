@@ -59,3 +59,4 @@ familia(X,Y) :- familiaSanguinea(X,Y); agregados(X,Y).
 :- dynamic progenitor/2.
 :- dynamic homem/1.
 :- dynamic mulher/1.
+:- dynamic casado/2.
