@@ -55,3 +55,7 @@ agregada(X,Y) :- agregados(X,Y), mulher(X).
 agregado(X,Y) :- agregados(X,Y), homem(X).
 
 familia(X,Y) :- familiaSanguinea(X,Y); agregados(X,Y).
+
+:- dynamic progenitor/2.
+:- dynamic homem/1.
+:- dynamic mulher/1.

@@ -96,8 +96,44 @@ option(9) :- nl,
     forall(setof(X, esposa(X,Y), [H|_]),
     format('Esposa de ~w: ~w\n', [Y, H])), nl, !.
 
+option(10) :-
+    submenu, !.
 
 option(_) :- write('Escolha uma opção válida.'), nl, !.
+
+submenu:-  repeat,
+	write('=== MENU DE ATUALIZAÇÃO DA BASE ==='), nl,
+	write('1. Adicionar pessoa a base'), nl,
+	write('2. Mostrar todas as pessoas da base de dados'), nl,
+    write('3. Adicionar progenitores'), nl,
+	write('0. Sair para o menu principal'), nl,
+	read(K),
+	submenu_option(K),
+	K==0,
+	!.
+
+submenu_option(0):- !.
+submenu_option(1):- 
+    write('Você deseja adicionar uma mulher ou um homem? (0 = Homem, 1 = Mulher)'), nl,
+    read(Escolha),
+    ifThenElse(Escolha =:= 0, inserirHomemNaBase, inserirMulherNaBase), !.
+submenu_option(2):- mostrarPessoasNaBase, nl, !.
+submenu_option(3):- adicionarProgenitores, nl, !.
+
+submenu_option(_):- write('Escolha uma opção válida.'), nl, !.
+
+inserirHomemNaBase():- write('Digite o nome do homem a ser inserido'), read(Pessoa), asserta(homem(Pessoa)).
+
+inserirMulherNaBase():- write('Digite o nome da mulher a ser inserida'), read(Pessoa), asserta(mulher(Pessoa)).
+
+mostrarPessoasNaBase():- write('Listando pessoas da base..'), nl,
+                         forall(setof(_, homem(X), _), format('Homem: ~w\n', X)),
+                         forall(setof(_, mulher(Y), _), format('Mulher: ~w\n', Y)).
+
+adicionarProgenitores():-write('Digite o progenitor e seu/sua filho(a)'), nl,
+                   write('Progenitor:'), nl, read(Progenitor), nl,
+                   write('Filho(a):'), nl, read(Filho), nl,
+                   asserta(progenitor(Progenitor, Filho)).
 
 leTiosIndividual(X,Y) :- 
 	write('Listagem de sobrinhos:'), nl, findall(X, sobrinhos(X,Y), L), sort(L, X), printlist(X), nl,
