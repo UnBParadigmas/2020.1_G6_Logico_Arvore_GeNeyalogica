@@ -1,4 +1,14 @@
-antepassado(X,Y) :- progenitor(X,Y); progenitor(X,Z), antepassado(Z,Y).
+diferente(X,Y) :- X\==Y. %X é diferente de Y
+
+casados(X,Y) :- casado(X,Y); casado(Y,X).
+
+antepassado(X,Y) :-
+    progenitor(X,Y);
+    progenitor(X,Z), antepassado(Z,Y).
+
+descendente(X,Y) :-
+    filhos(X,Y);
+    filhos(X,Z), descendente(Z,Y).
 
 mae(X,Y) :- progenitor(X,Y), mulher(X).
 pai(X,Y) :- progenitor(X,Y), homem(X).
@@ -19,7 +29,9 @@ irmaos(X,Y) :- progenitor(Z,X), progenitor(Z,Y), diferente(X,Y).
 irma(X,Y) :- irmaos(X,Y), mulher(X).
 irmao(X,Y) :- irmaos(X,Y), homem(X). % "Para todo X e Y, se Z é progenitor de X e Z é progenitor de Y e X é homem, X é um irmão"
 
-tios(X,Y) :- irmaos(X,Z), progenitor(Z,Y).
+tios(X,Y) :-
+    irmaos(X,Z), progenitor(Z,Y);
+    casados(X,Z), irmaos(Z,W), progenitor(W,Y).
 tia(X,Y) :- tios(X,Y), mulher(X). % "\+ = operador NOT"
 tio(X,Y) :- tios(X,Y), homem(X).
 
@@ -31,4 +43,13 @@ primos(X,Y) :- filhos(X,Z), tios(Z,Y).
 primo(X,Y) :- primos(X,Y), homem(X).
 prima(X,Y) :- primos(X,Y), mulher(X).
 
-diferente(X,Y) :- X\==Y. %X é diferente de Y
+familiaSanguinea(X,Y) :-
+    descendente(X,Y);
+    descendente(X,Z), antepassado(Z,Y), diferente(X,Y);
+    antepassado(X,Y).
+
+agregados(X,Y) :- casados(X,Z), familiaSanguinea(Z,Y), \+familiaSanguinea(X,Y).
+agregada(X,Y) :- agregados(X,Y), mulher(X).
+agregado(X,Y) :- agregados(X,Y), homem(X).
+
+familia(X,Y) :- familiaSanguinea(X,Y); agregados(X,Y).

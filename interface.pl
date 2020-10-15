@@ -39,7 +39,7 @@ option(3) :- nl,
 option(4) :- nl,
     write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
-	ifThenElse(Alternativa =:= 1, leTioIndividual(X,Y), write('Listagem de todos os tios...')),
+	ifThenElse(Alternativa =:= 1, leTioIndividual(X,Y), write('Listagem de todos os sobrinhos e sobrinhas...')),
     nl,
     forall(setof(X, sobrinho(X,Y), L),
     format('Sobrinho(s) de ~w: ~w\n', [Y, L])), nl,
@@ -69,7 +69,7 @@ option(6) :- nl,
 option(7) :- nl,
 	write('Deseja listar uma pessoa específica? (1 = Sim/ 0 = Não)'),
 	read(Alternativa),
-	ifThenElse(Alternativa =:= 1, leAvosIndividual(X,Y), write('Listagem de todos os avós...')),
+	ifThenElse(Alternativa =:= 1, leAvosIndividual(X,Y), write('Listagem de todos os netos e netas...')),
     nl,
     forall(setof(X, neto(X,Y), L),
     format('Neto(s) de ~w: ~w\n', [Y, L])), nl,
@@ -123,7 +123,7 @@ lePaisIndividual(X,Y) :-
 	write('Digite o nome de um(a) pai/mãe para saber seus filhos:'), nl,
 	read(Progenitor), forall(setof(_, filhos(Filho,Progenitor), _),
     format('Filho(a) de ~w: ~w\n', [Progenitor, Filho])).
-    
+
 leAvosIndividual(X,Y) :- 
 	write('Listagem de avós:'), nl, findall(X, avos(X,Y), L), sort(L, X), printlist(X), nl,
 	write('Digite o nome de um(a) avô(ó) para saber seus netos:'), nl,
