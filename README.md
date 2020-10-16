@@ -13,10 +13,26 @@
 | 16/0016428  |  Paulo Victor de Menezes Lopes |
 
 ## Sobre 
-Trata-se de um programa que cria e gerencia uma árvore genealógica com relações de grau de parentesco e casamentos. Pode-se utilizar a base padrão de dados ou inserir membros manualmente. 
+Trata-se de um programa que cria e gerencia uma árvore genealógica com relações de grau de parentesco e casamentos. Pode-se utilizar a base padrão de dados ou inserir membros manualmente.<br>
+Imagem da base padrão:<br>
+![Imagem base padrao](./imgs/base_padrao.jpg)
+
 
 ## Screenshots
 
+Imagem do menu:<br>
+![Imagem menu](./imgs/imagem_menu.png)
+<br>
+Imagem da atualização da base de dados:<br>
+![Imagem atualizacao base](./imgs/imagem_atualizacao_base.png)
+<br>
+Imagem de listagem completa:<br>
+![Imagem listagem completa](./imgs/listagem_completa.png)
+<br>
+
+Imagem de listagem individual:<br>
+![Imagem listagem individual](./imgs/listagem_individual.png)
+<br>
 
 
 ## Instalação 

@@ -5,7 +5,7 @@ interface(X) :-
 
 option(0) :- !.
 
-option(1) :- consult('familia.pl').
+option(1) :- consult('familia.pl'), !.
 
 option(2) :-
     submenu, !.
