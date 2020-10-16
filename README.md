@@ -55,4 +55,4 @@ main.
 Siga as instruções do menu para interagir com o projeto.
 
 ## Vídeo
-O video com a explicação de implementação e funcionamento do projeto se encontram [aqui]().
+O video com a explicação de implementação e funcionamento do projeto se encontram [aqui](https://www.youtube.com/embed/B5GLc7ZtKps).
